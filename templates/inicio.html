@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- Bloque que define el titulo  -->
+{% block titulo %}
+    Home
+{% endblock titulo %}
+
+
+<!-- Bloque que trae el cuerpo  -->
+{% block body %}
+    
+{% include 'includes/nav.html' %}
+<style>
+  /* Define una clase personalizada para un campo de texto más pequeño */
+  .custom-textarea {
+    height: 100px; /* Ajusta la altura según tus necesidades */
+  }
+</style>
+
+<!-- Inicio de la imagen de portada  -->
+
+<section class="welcome-section mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Texto de Bienvenida -->
+                <h1>Bienvenido a nuestro portal de empleados</h1>
+                <p>Aquí puedes registrar y ver información de los empleados de nuestra empresa.
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas veniam error itaque! Ea, quasi veniam! Molestias ad quae sunt, cum debitis et eveniet soluta, delectus quidem vitae numquam minus quibusdam Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam exercitationem harum fugiat maiores hic odit vero, blanditiis soluta nemo id in veniam nisi iste quam dolorem nam officia rerum veritatis!
+                </p>
+
+                <!-- Botón de Registro -->
+                <a href="{% url 'persona_app:crear' %}" class="btn btn-primary">Registrar Empleado</a>
+            </div>
+            <div class="col-md-6">
+                <!-- Imagen Agradable -->
+                <img src="{% static 'img/imagen3.jpg' %}" alt="Bienvenida" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="areas" class="proyectos-recientes  d-flex flex-column text-center mt-5">
+    <!-- galeria de las areas de la empresa -->
+    <h1 class="seccion-titulo">
+        Conoce nuestras areas de la empresa
+    </h1>
+    <div class="container">
+        <div class="row">
+            <!-- AREAS -->           
+            {% for imagen  in imagenes  %}               
+                <div class="col-12 col-md-6 col-lg-4">       
+                    <div class="proyecto">
+                        
+                        <a href="#">
+                            <img src={{imagen.direccion}} alt="">                            
+                            <div class="overlay">
+                                <p>{{imagen.title}}</p>
+                            </div>
+                        </a>
+
+                    </div>                   
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+<section class="text-center mt-5 mb-5">
+    <h1>
+        Ven y visitanos
+    </h1>
+
+</section>
+
+
+
+<section>
+    
+    <div class="container">
+        <div class="row">
+          <!-- Columna del mapa -->
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Ubicación</h5>
+                <!-- Aquí va tu mapa -->
+                <div id="map" style="height: 300px;"></div>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Columna del formulario "Get in Touch" -->
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Get in Touch</h5>
+                <!-- Aquí va tu formulario -->
+                <form method="POST" action="{% url 'persona_app:email' %}">
+                  {% csrf_token %}
+                  <!-- Campos del formulario -->
+                  <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    {{formulario.name}}
+                  </div>
+                  <div class="mb-3">
+                    <label for="nombre" class="form-label">Asunto</label>
+                    {{formulario.subject}}
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    {{formulario.email}}
+                  </div>
+                  <div class="mb-3">
+                    <label for="mensaje" class="form-label">Mensaje</label>
+                    {{formulario.mensaje}}
+                  </div>
+                  <!-- Botón de enviar -->
+                  <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#successModal">Enviar
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-check-fill" viewBox="0 0 16 16">
+                      <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+                      <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z"/>
+                    </svg>
+
+                  </button>
+                </form>
+                {% if formulario.errors %}
+                <div class="alert alert-danger">
+                    <strong>Error:</strong> Por favor, corrija los errores a continuación.
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+      
+</section>
+
+<!-- Modal para mostrar el mensaje de éxito -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Mensaje Enviado</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Tu mensaje ha sido enviado con éxito. Nos pondremos en contacto contigo pronto.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if formulario.errors %}
+  <div class="alert alert-danger">
+      <strong>Error:</strong> Por favor, corrija los errores a continuación.
+  </div>
+{% endif %}
+
+{% include 'includes/footer.html' %}
+
+
+
+
+
+
+{% endblock body %}
+
+

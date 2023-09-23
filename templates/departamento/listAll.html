@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- Bloque que define el titulo  -->
+{% block titulo %}
+    All
+{% endblock titulo %}
+
+<!-- Bloque que trae el cuerpo  -->
+{% block body %}
+    
+    {% include 'includes/nav.html' %}
+
+
+
+
+<section class="mb-5">
+    <div class="container mt-5">
+        <h2>Empleados</h2>
+        <!-- <div class="" style="width: fit-content;">
+            <form class="form-inline d-flex" action="{% url 'persona_app:filtrar' %}" method="GET">
+                {% csrf_token %}
+                <div class="form-group mb-2">
+                  <input type="text"  class="form-control" id="kword" name="kword" placeholder="Busca un empleado">
+                </div>
+                <button type="submit" class="btn btn-success mb-2 mx-3">Buscar</button>
+            </form>
+            
+        </div> -->
+        <table class="table table-bordered table-auto">
+            <thead>
+                <tr class="text-center">
+                    <th> id </th>
+                    <th> Name </th>
+                    <th> Last Name </th>
+                    <th> Department </th>
+                    <th>
+                         Accion 
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for empleado in empleados %}
+                <tr>
+                    <td>{{ empleado.id }}</td>
+                    <td>{{ empleado.first_name }}</td>
+                    <td>{{ empleado.apellidos }}</td>
+                    <td>{{ empleado.departamento }}</td>
+                    <td class="" style="width: 80px;"> 
+                        <div class="d-flex justify-content-betwen align-items-center">
+                            <div class="px-1">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter{{ empleado.id }}">
+                                    Eliminar
+                                </button>
+                                <!-- modal  -->                              
+                                <div class="modal fade" id="exampleModalCenter{{ empleado.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Confirmar eliminación</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ¿Estás seguro de que deseas eliminar a {{ empleado.first_name }}?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <form action="{% url 'persona_app:eliminar' empleado.id %}" method="POST">
+                                                {% csrf_token %}                                               
+                                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                
+                                            </form>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>                               
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2">No hay datos disponibles.</td>
+                </tr>
+
+                    
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Paginador -->
+        
+        {% if is_paginated %}
+            
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    
+                    {% if page_obj.has_previous %}
+                        
+                        <li class="page-item ">
+                            <a class="page-link" href="?page={{page_obj.previous_page_number}}" tabindex="-1">Previous</a>
+                        </li>
+                        
+                    {% endif %}
+
+                    
+                    {% for pagina in paginator.page_range %}
+                        
+                        {% if pagina == page_obj.number  %} 
+                            
+                            <li class="page-item"><a class="page-link active" href="?page={{pagina}}">{{pagina}}</a></li>  
+                        {% else %}
+                            <li class="page-item"><a class="page-link " href="?page={{pagina}}">{{pagina}}</a></li>  
+                        {% endif %}
+                            
+                        
+                    {% endfor %}
+                        
+                    
+                    {% if page_obj.has_next %}
+                        
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a>
+                        </li>
+                    {% endif %}
+                        
+                </ul>
+            </nav>
+        {% endif %}
+            
+    </div>
+</section>
+
+<!-- MODAL  -->
+
+  
+<!-- Modal -->
+
+
+
+
+
+
+
+
+<section>
+    {% include 'includes/footer.html' %}
+</section>
+
+
+{% endblock body %}
+    

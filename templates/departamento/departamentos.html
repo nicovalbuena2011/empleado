@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- Bloque que define el titulo  -->
+{% block titulo %}
+    Home
+{% endblock titulo %}
+
+
+<!-- Bloque que trae el cuerpo  -->
+{% block body %}
+    
+{% include 'includes/nav.html' %}
+
+
+
+
+<div class="container px-4 py-5">
+    <h2>Dale <strong>click</strong> a un area para ver sus empleados</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-4">      
+        {% for e in departamentos  %}
+            <div class="card border-dark mb-3 mx-3" style="max-width: 18rem;">
+                <div class="card-header">{{e.name}}</div>
+                <div class="card-body text-dark">
+                    <h5 class="card-title">{{e.short_name}}</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores veritatis cumque, molestias enim, autem excepturi nulla.</p>
+                    <a href="{% url 'departamento_app:detail_dep' e.name %}">
+                        <button type="button" class="btn btn-outline-info">Ver personal</button>
+
+                    </a>
+                </div>
+            </div>
+            
+        {% endfor %}
+    </div>
+</div>
+
+
+{% include 'includes/footer.html' %}
+
+
+{% endblock body %}

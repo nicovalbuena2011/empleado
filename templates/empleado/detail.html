@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- Bloque que define el titulo  -->
+{% block titulo %}
+    All
+{% endblock titulo %}
+
+<!-- Bloque que trae el cuerpo  -->
+{% block body %}
+    
+    {% include 'includes/nav.html' %}
+
+    <section>
+        <div class="container">
+
+            <div class="row mt-5">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card" style="width: 18rem;">
+                        
+                        {% if empleado.image  %}
+                            <img class="card-img-top" src="{{empleado.image.url}}" alt="Card image cap">
+
+                        {% else %}
+
+                            <img class="card-img-top" src="{% static 'img/unknow.jpg' %}" alt="Card image cap">
+
+
+                        {% endif %}
+                        <div class="card-body">
+                          <h5 class="card-title"><strong>{{empleado.first_name}}  {{empleado.apellidos}}</strong></h5>
+                          <p class="card-text">
+                              <h6>{{empleado.get_job_display}} - {{empleado.departamento}}</h6>
+                              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse fuga saepe voluptatibus.
+
+                          </p>
+                          <div class="">
+                                <a href="{% url 'persona_app:list_all' %}" class="btn btn-primary">Go back</a>
+                                <a href="{% url 'persona_app:editar' empleado.id %}" class="btn btn-warning">Editar</a>
+                          </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+
+                    <div class="" style="margin-left: 40px;">
+                        <h2>Calificación</h2>
+                        <img style="width: 60px; margin-right: 10px;" src="{% static 'img/medal.webp' %}" alt="">
+                        <img style="width: 60px; margin-right: 10px;" src="{% static 'img/medal.webp' %}" alt="">
+                        <img style="width: 60px; margin-right: 10px;" src="{% static 'img/medal.webp' %}" alt="">
+                        <img style="width: 60px; margin-right: 10px; filter: grayscale(100%);" src="{% static 'img/medal.webp' %}" alt="">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+        
+                        <h3>Habilidades</h3>
+                        <div class="">
+                            
+                            {% for e in skills  %}
+                                <li>
+                                    {{e.habilidad}}
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    
+
+    <section>
+        {% include 'includes/footer.html' %}
+    </section>
+
+
+{% endblock body %}

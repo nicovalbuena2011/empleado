@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- Bloque que define el titulo  -->
+{% block titulo %}
+    All
+{% endblock titulo %}
+
+<!-- Bloque que trae el cuerpo  -->
+{% block body %}
+    
+    {% include 'includes/nav.html' %}
+
+
+    <section class="mb-5">
+        <div class="container mt-5">
+            <h2>Empleados</h2>
+            <div class="" style="width: fit-content;">
+                <form class="form-inline d-flex" action="{% url 'persona_app:filtrar' %}" method="GET">
+                    {% csrf_token %}
+                    <div class="form-group mb-2">
+                      <input type="text"  class="form-control" id="kword" name="kword" placeholder="Busca un empleado">
+                    </div>
+                    <button type="submit" class="btn btn-success mb-2 mx-3">Buscar</button>
+                </form>
+                
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="text-center">
+                        <th> id </th>
+                        <th> Name </th>
+                        <th> Last Name </th>
+                        <th> Department </th>
+                        <th> Accion </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for empleado in empleados %}
+                    <tr>
+                        <td>{{ empleado.id }}</td>
+                        <td>{{ empleado.first_name }}</td>
+                        <td>{{ empleado.apellidos }}</td>
+                        <td>{{ empleado.departamento }}</td>
+                        <td class="text-center"> 
+                            <a href="{% url 'persona_app:detail' empleado.id %}">
+                                <button type="button" class="btn btn-info">Info</button>     
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="2">No hay datos disponibles.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- Paginador -->
+            
+            {% if is_paginated %}
+                
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        
+                        {% if page_obj.has_previous %}
+                            
+                            <li class="page-item ">
+                                <a class="page-link" href="?page={{page_obj.previous_page_number}}" tabindex="-1">Previous</a>
+                            </li>
+                            
+                        {% endif %}
+
+                        
+                        {% for pagina in paginator.page_range %}
+                            
+                            {% if pagina == page_obj.number  %} 
+                                
+                                <li class="page-item"><a class="page-link active" href="?page={{pagina}}">{{pagina}}</a></li>  
+                            {% else %}
+                                <li class="page-item"><a class="page-link " href="?page={{pagina}}">{{pagina}}</a></li>  
+                            {% endif %}
+                                
+                            
+                        {% endfor %}
+                            
+                        
+                        {% if page_obj.has_next %}
+                            
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a>
+                            </li>
+                        {% endif %}
+                            
+                    </ul>
+                </nav>
+            {% endif %}
+                
+        </div>
+    </section>
+
+    <section>
+        {% include 'includes/footer.html' %}
+    </section>
+
+
+{% endblock body %}

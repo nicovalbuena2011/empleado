@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- Bloque que define el titulo  -->
+{% block titulo %}
+    All
+{% endblock titulo %}
+
+<!-- Bloque que trae el cuerpo  -->
+{% block body %}
+    
+    {% include 'includes/nav.html' %}
+
+    <div class="container d-flex justify-content-center align-items-center p-5 ">
+        <div class="col-12 col-md-6 col-lg-4 card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h4>Registra un Empleado</h4>
+                </div>
+                <form action="" enctype="multipart/form-data" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        {{form.first_name}}
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">apellidos</label>
+                        {{form.apellidos}}
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Trabajo</label>
+                        {{form.job}}
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Departamento</label>
+                        {{form.departamento}}
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label"><strong>Habilidades</strong> ctrl + click para añadir varias</label>
+                        {{form.habilidades}}
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Imagen</label>
+                        {{form.image}}
+
+                    </div>
+                    <!-- my_template.html -->
+                    <!-- <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div> -->
+                    <div>
+                        <button type="submit" class="btn btn-success" style="width: 100%;" data-toggle="modal" data-target="#successModal">Registrar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de éxito -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Registro Exitoso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¡El empleado se ha registrado exitosamente!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <section>
+        {% include 'includes/footer.html' %}
+    </section>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Escucha cambios en los campos del formulario y actualiza la barra de progreso
+        $('input, select, textarea').on('input', function() {
+        // Calcula el progreso basado en el número de campos completados
+        var totalCampos = $('input, select, textarea').length;
+        var camposCompletados = $('input:valid, select:valid, textarea:valid').length;
+        var progreso = (camposCompletados / totalCampos) * 100;
+    
+        // Actualiza la barra de progreso
+        $('.progress-bar').css('width', progreso + '%').attr('aria-valuenow', progreso);
+        });
+    });
+</script> -->
+    
+    
+{% endblock body %}
+        

@@ -1,0 +1,32 @@
+{% load static %}
+<nav class="navbar navbar-expand-md bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'persona_app:home' %}">
+        <img src="{% static 'img/devicon.png' %}" style="width: 50px; height: 50px;" alt="devicon">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'persona_app:home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'persona_app:list_all' %}">Empleados</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'departamento_app:departamentos' %}" >Departamentos</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" aria-disabled="true">Administrar</a>
+          </li> -->
+        </ul>
+
+        <a href="{% url 'persona_app:crear' %}">
+
+          <button class="btn btn-outline-success" >Registrar Empleado</button>
+        </a>
+      </div>
+    </div>
+</nav>

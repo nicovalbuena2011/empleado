@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <title>Document</title>
+    </head>
+    <body>
+
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+            <!-- Indicadores de Carrusel -->
+            <ol class="carousel-indicators">
+                <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+                <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+            </ol>
+            
+            <!-- Contenido del Carrusel -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'img/carrusel1.jpg' %}" class="d-block w-100" alt="Imagen 1">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Título de la Imagen 1</h5>
+                        <p>Descripción de la Imagen 1.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'img/carrusel2.png' %}" class="d-block w-100" alt="Imagen 2">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Título de la Imagen 2</h5>
+                        <p>Descripción de la Imagen 2.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'img/carrusel3.jpg' %}" class="d-block w-100" alt="Imagen 3">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Título de la Imagen 3</h5>
+                        <p>Descripción de la Imagen 3.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Controles del Carrusel -->
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </a>
+        </div>
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <strong>Error:</strong> Por favor, corrija los errores a continuación.
+            </div>
+        {% endif %}
+
+        <!-- <script src="{% static 'js/jquery.min.js' %}"></script> -->
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>       
+
+    </body>
+</html>
