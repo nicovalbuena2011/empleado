@@ -28,6 +28,10 @@ class Empleado(models.Model):
         ('1', 'Administrador'),
         ('2', 'Economista'),
         ('3', 'Otro'),
+        ('4', 'Secretaria'),
+        ('5', 'Servicios Generales'),
+        ('6', 'Practicante Universitario'),
+        ('7', 'Coordinador'),
 
     )
     job = models.CharField('Trabajo', max_length= 1, choices= job_choices)
