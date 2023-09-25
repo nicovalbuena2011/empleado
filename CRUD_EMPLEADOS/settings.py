@@ -156,7 +156,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-MEDIA_URL = '/media/empleados/'  # La URL de los archivos multimedia
+MEDIA_URL = '/media/'  # La URL de los archivos multimedia
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # La ubicación en el sistema de archivos donde se almacenarán los archivos multimedia
 
 
