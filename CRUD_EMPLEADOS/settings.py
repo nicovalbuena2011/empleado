@@ -31,9 +31,10 @@ SECRET_KEY = os.getenv('SECRET_k')
 DEBUG = False
 
 ALLOWED_HOSTS = ['prueba-empleados.azurewebsites.net','127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['prueba-empleados.azurewebsites.net']
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = ['https://prueba-empleados.azurewebsites.net']
+
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
 
 # Application definition
