@@ -30,7 +30,10 @@ SECRET_KEY = os.getenv('SECRET_k')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['prueba-empleados.azurewebsites.net','localhost','http://127.0.0.1:8000/']
+ALLOWED_HOSTS = ['prueba-empleados.azurewebsites.net','127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['prueba-empleados.azurewebsites.net']
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 
 # Application definition
