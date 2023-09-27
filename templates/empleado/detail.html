@@ -18,7 +18,7 @@
                     <div class="card" style="width: 18rem;">
                         
                         {% if empleado.image  %}
-                            <img class="card-img-top" src="{% static 'img/'|add:empleado.name|add:'.jpg' %}" alt="Card image cap">
+                            <img class="card-img-top" src="{% static 'img/'|add:empleado.first_name|add:'.jpg' %}" alt="Card image cap">
                         {% else %}
                             <img class="card-img-top" src="{% static 'img/unknow.jpg' %}" alt="Card image cap">
                         {% endif %}
