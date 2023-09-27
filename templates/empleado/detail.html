@@ -19,19 +19,14 @@
                         
                         {% if empleado.image  %}
                             <img class="card-img-top" src="{{empleado.image.url}}" alt="Card image cap">
-
                         {% else %}
-
-                            <img class="card-img-top" src="{% static 'img/unknow.jpg' %}" alt="Card image cap">
-
-
+                            <img class="card-img-top" src="{% static 'img/'|add:empleado.name|add:'.jpg' %}" alt="Card image cap">
                         {% endif %}
                         <div class="card-body">
                           <h5 class="card-title"><strong>{{empleado.first_name}}  {{empleado.apellidos}}</strong></h5>
                           <p class="card-text">
                               <h6>{{empleado.get_job_display}} - {{empleado.departamento}}</h6>
                               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse fuga saepe voluptatibus.
-
                           </p>
                           <div class="">
                                 <a href="{% url 'persona_app:list_all' %}" class="btn btn-primary">Go back</a>
