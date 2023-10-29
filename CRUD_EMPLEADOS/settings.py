@@ -12,10 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
-from dotenv import load_dotenv
+import dj_database_url
+# from dotenv import load_dotenv
 
 # Carga las variables de entorno desde el archivo .env
-load_dotenv()
+# load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,7 +31,7 @@ SECRET_KEY = os.getenv('SECRET_k')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['prueba-empleados.azurewebsites.net','127.0.0.1']
+ALLOWED_HOSTS = ['.vercel.app']
 CSRF_TRUSTED_ORIGINS = ['https://prueba-empleados.azurewebsites.net']
 
 # SESSION_COOKIE_SECURE = True
@@ -101,16 +102,20 @@ Postgress
 #     }
 # }
 
-"""
-DBsqlite3
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# """
+# DBsqlite3
+# """
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
+# Utiliza dj_database_url para cargar la variable DATABASE_URL
+DATABASES = {
+    'default': dj_database_url.config(default='postgres://postgres:Dd-eEB43E--dBbab3c3EF4eAeaBgBdb-@viaduct.proxy.rlwy.net:19449/railway')
+}
 
 
 # Password validation
